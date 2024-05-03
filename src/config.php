@@ -1,8 +1,10 @@
 <?php
 
+use craft\fields\Matrix;
 use craft\fields\PlainText;
 use craft\fields\Table;
 use craft\fieldlayoutelements\entries\EntryTitleField;
+use Lmr\AutoTranslator\Fields\Types\MatrixField;
 use Lmr\AutoTranslator\Fields\Types\TextField;
 use Lmr\AutoTranslator\Fields\Types\RichtextField;
 use Lmr\AutoTranslator\Fields\Types\TableField;
@@ -26,6 +28,7 @@ return [
      */
     'fields' => [
         PlainText::class => TextField::class,
+        Matrix::class => MatrixField::class,
         Table::class => TableField::class,
         EntryTitleField::class => TextField::class,
         \craft\ckeditor\Field::class => RichtextField::class,

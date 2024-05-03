@@ -4,8 +4,10 @@ namespace Lmr\AutoTranslator\Models;
 
 use craft\base\Model;
 use craft\fieldlayoutelements\entries\EntryTitleField;
+use craft\fields\Matrix;
 use craft\fields\PlainText;
 use craft\fields\Table;
+use Lmr\AutoTranslator\Fields\Types\MatrixField;
 use Lmr\AutoTranslator\Fields\Types\RichtextField;
 use Lmr\AutoTranslator\Fields\Types\TableField;
 use Lmr\AutoTranslator\Fields\Types\TextField;
@@ -74,8 +76,9 @@ class Settings extends Model
      */
     public array $fields = [
         PlainText::class => TextField::class,
-        EntryTitleField::class => TextField::class,
+        Matrix::class => MatrixField::class,
         Table::class => TableField::class,
+        EntryTitleField::class => TextField::class,
         \craft\ckeditor\Field::class => RichtextField::class,
     ];
 
