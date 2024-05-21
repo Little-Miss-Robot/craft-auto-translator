@@ -2,6 +2,10 @@
 <h1 align="center">Auto Translator for Craft CMS</h1>
 <h3 align="center">By Little Miss Robot</h3>
 
+## Development
+Use a path repository to develop this plugin locally in your project. More info here: https://craftcms.com/docs/4.x/extend/plugin-guide.html#path-repository
+and for Craft 5.x, here: https://craftcms.com/docs/5.x/extend/plugin-guide.html#path-repository
+
 ## Roadmap v1.0.0
 
 | Milestone            | Description                                                                                                                                                                                       |
