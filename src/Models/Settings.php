@@ -88,7 +88,7 @@ class Settings extends Model
     protected function defineRules(): array
     {
         return [
-            [['enabled', 'fromLanguages', 'toLanguages', 'service', 'services', 'policy', 'translate', 'fields',], 'required'],
+            [['enabled', 'fromLanguages', 'toLanguages', 'service', 'services', 'policy', 'fields'], 'required'],
         ];
     }
 }
