@@ -6,7 +6,8 @@
 	label: 'Enabled',
 	instructions: 'Turn this off if you don\'t want auto translator to be active',
 	name: 'enabled',
-	on: settings.enabled
+	on: settings.enabled,
+	errors: settings.getErrors('enabled')
 }) }}
 
 {{ forms.selectField({
@@ -14,19 +15,22 @@
 	instructions: 'The service to use for the automatic translations',
 	name: 'service',
 	options: serviceOptions,
-	value: settings.service
+	value: settings.service,
+	errors: settings.getErrors('service')
 }) }}
 
 {{ forms.checkboxGroupField({
 	label: 'Source languages',
 	name: 'fromLanguages',
 	options: languageOptions,
-	values: settings.fromLanguages
+	values: settings.fromLanguages,
+	errors: settings.getErrors('fromLanguages')
 }) }}
 
 {{ forms.checkboxGroupField({
 	label: 'Target languages',
 	name: 'toLanguages',
 	options: languageOptions,
-	values: settings.toLanguages
+	values: settings.toLanguages,
+	errors: settings.getErrors('toLanguages')
 }) }}
