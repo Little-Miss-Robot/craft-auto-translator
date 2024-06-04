@@ -79,7 +79,8 @@ class Settings extends Model
         Matrix::class => MatrixField::class,
         Table::class => TableField::class,
         EntryTitleField::class => TextField::class,
-        \craft\ckeditor\Field::class => RichtextField::class,
+        'craft\\ckeditor\\Field' => RichtextField::class,
+        'craft\\redactor\\Field' => RichtextField::class,
     ];
 
     /**
