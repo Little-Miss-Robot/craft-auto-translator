@@ -18,6 +18,7 @@ use Lmr\AutoTranslator\Contracts\TranslationServiceInterface;
 use Lmr\AutoTranslator\Fields\Resolver;
 use Lmr\AutoTranslator\Models\Settings;
 use Lmr\AutoTranslator\Translator\Translator;
+use Lmr\AutoTranslator\Services\FieldService;
 
 class Plugin extends BasePlugin
 {
@@ -91,6 +92,11 @@ class Plugin extends BasePlugin
         $nav = parent::getCpNavItem();
         $nav['label'] = Craft::t('auto-translator', 'Auto Translator');
 
+        $nav['subnav']['content'] = [
+            'label' => Craft::t('auto-translator', 'nav.content-settings'),
+            'url' => 'auto-translator/content-settings'
+        ];
+
         if ($canEditSettings && $currentUser->can('auto-translator:edit-plugin-settings')) {
             $nav['subnav']['plugin'] = [
                 'label' => Craft::t('auto-translator', 'nav.plugin-settings'),
@@ -133,10 +139,14 @@ class Plugin extends BasePlugin
             $config = $this->getSettings();
 
             $entry = $event->sender;
+
             $translatableSections = $config->translate;
             $sectionHandle = $entry->section->handle;
+            $entryTypeHandle = $entry->type->handle;
 
-            if (! $config->enabled || ! isset($translatableSections[$sectionHandle])) {
+            $identifier = Plugin::getInstance()->fieldService->getIdentifierForSection($sectionHandle, $entryTypeHandle);
+
+            if (! $config->enabled || ! isset($translatableSections[$identifier])) {
                 return;
             }
 
@@ -154,6 +164,7 @@ class Plugin extends BasePlugin
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
             function(RegisterUrlRulesEvent $event) {
                 $event->rules['auto-translator'] = 'auto-translator/base/index';
+                $event->rules['auto-translator/content-settings'] = 'auto-translator/base/content';
                 $event->rules['auto-translator/plugin-settings'] = 'auto-translator/base/plugin';
             }
         );

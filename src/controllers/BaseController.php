@@ -4,15 +4,13 @@ namespace Lmr\AutoTranslator\controllers;
 use Craft;
 use craft\web\Controller;
 
-use yii\web\Response;
-use yii\web\ServerErrorHttpException;
 use Lmr\AutoTranslator\Plugin;
 
 class BaseController extends Controller
 {
     public function actionIndex()
     {
-        $url = "auto-translator/plugin-settings";
+        $url = "auto-translator/content-settings";
 
         return $this->redirect($url);
     }
@@ -38,5 +36,15 @@ class BaseController extends Controller
                 'languageOptions' => array_combine($languages, $languages),
             ],
         );
+    }
+
+    public function actionContent() {
+        $config = Plugin::getInstance()->getSettings();
+        $fieldInfo = Plugin::getInstance()->fieldService->getElementInfo();
+
+        return $this->renderTemplate('auto-translator/content-settings', [
+            'settings' => $config,
+            'fieldInfo' => $fieldInfo,
+        ]);
     }
 }
