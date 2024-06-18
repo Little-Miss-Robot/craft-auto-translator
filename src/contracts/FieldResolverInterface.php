@@ -1,6 +1,6 @@
 <?php
 
-namespace Lmr\AutoTranslator\contracts;
+namespace littlemissrobot\autotranslator\contracts;
 
 use craft\base\FieldInterface as CraftFieldInterface;
 use craft\elements\Entry;
@@ -8,7 +8,7 @@ use craft\fieldlayoutelements\BaseField;
 
 /*
  * Responsible for resolving the entry's field to an implementation of
- * Lmr\AutoTranslator\Contracts\Field specifically for that field
+ * littlemissrobot\autotranslator\Contracts\Field specifically for that field
  * */
 interface FieldResolverInterface
 {

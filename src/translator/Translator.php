@@ -1,11 +1,11 @@
 <?php
 
-namespace Lmr\AutoTranslator\translator;
+namespace littlemissrobot\autotranslator\translator;
 
 use Craft;
 use craft\elements\Entry;
-use Lmr\AutoTranslator\contracts\PolicyInterface;
-use Lmr\AutoTranslator\Plugin;
+use littlemissrobot\autotranslator\contracts\PolicyInterface;
+use littlemissrobot\autotranslator\Plugin;
 
 class Translator
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Lmr\AutoTranslator\contracts;
+namespace littlemissrobot\autotranslator\contracts;
 
 use craft\elements\Entry;
 

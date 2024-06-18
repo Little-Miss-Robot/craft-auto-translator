@@ -1,11 +1,11 @@
 <?php
 
-namespace Lmr\AutoTranslator\policies;
+namespace littlemissrobot\autotranslator\policies;
 
 use craft\elements\Entry;
 use craft\helpers\ElementHelper;
-use Lmr\AutoTranslator\contracts\PolicyInterface;
-use Lmr\AutoTranslator\Plugin;
+use littlemissrobot\autotranslator\contracts\PolicyInterface;
+use littlemissrobot\autotranslator\Plugin;
 
 class DefaultPolicy implements PolicyInterface
 {

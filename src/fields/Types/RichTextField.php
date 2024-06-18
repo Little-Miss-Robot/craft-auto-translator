@@ -1,10 +1,10 @@
 <?php
 
-namespace Lmr\AutoTranslator\fields\Types;
+namespace littlemissrobot\autotranslator\fields\Types;
 
 use craft\elements\Entry;
-use Lmr\AutoTranslator\contracts\FieldInterface;
-use Lmr\AutoTranslator\fields\Field;
+use littlemissrobot\autotranslator\contracts\FieldInterface;
+use littlemissrobot\autotranslator\fields\Field;
 
 class RichTextField extends Field implements FieldInterface
 {

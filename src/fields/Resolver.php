@@ -1,15 +1,15 @@
 <?php
 
-namespace Lmr\AutoTranslator\fields;
+namespace littlemissrobot\autotranslator\fields;
 
 use Craft;
 use craft\elements\Entry;
 use craft\fieldlayoutelements\BaseField;
 use craft\fieldlayoutelements\CustomField;
 use craft\base\FieldInterface as CraftFieldInterface;
-use Lmr\AutoTranslator\contracts\FieldInterface;
-use Lmr\AutoTranslator\contracts\FieldResolverInterface;
-use Lmr\AutoTranslator\Plugin;
+use littlemissrobot\autotranslator\contracts\FieldInterface;
+use littlemissrobot\autotranslator\contracts\FieldResolverInterface;
+use littlemissrobot\autotranslator\Plugin;
 use yii\base\InvalidArgumentException;
 
 class Resolver implements FieldResolverInterface

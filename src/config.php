@@ -4,10 +4,10 @@ use craft\fields\Matrix;
 use craft\fields\PlainText;
 use craft\fields\Table;
 use craft\fieldlayoutelements\entries\EntryTitleField;
-use Lmr\AutoTranslator\fields\Types\MatrixField;
-use Lmr\AutoTranslator\fields\Types\TextField;
-use Lmr\AutoTranslator\fields\Types\RichTextField;
-use Lmr\AutoTranslator\fields\Types\TableField;
+use littlemissrobot\autotranslator\fields\Types\MatrixField;
+use littlemissrobot\autotranslator\fields\Types\TextField;
+use littlemissrobot\autotranslator\fields\Types\RichTextField;
+use littlemissrobot\autotranslator\fields\Types\TableField;
 
 return [
     /**

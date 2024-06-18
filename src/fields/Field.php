@@ -1,9 +1,9 @@
 <?php
 
-namespace Lmr\AutoTranslator\fields;
+namespace littlemissrobot\autotranslator\fields;
 
 use craft\elements\Entry;
-use Lmr\AutoTranslator\contracts\TranslationServiceInterface;
+use littlemissrobot\autotranslator\contracts\TranslationServiceInterface;
 
 abstract class Field
 {

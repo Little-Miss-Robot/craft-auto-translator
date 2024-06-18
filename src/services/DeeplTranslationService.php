@@ -1,9 +1,9 @@
 <?php
 
-namespace Lmr\AutoTranslator\services;
+namespace littlemissrobot\autotranslator\services;
 
 use DeepL\Translator;
-use Lmr\AutoTranslator\contracts\TranslationServiceInterface;
+use littlemissrobot\autotranslator\contracts\TranslationServiceInterface;
 
 class DeeplTranslationService implements TranslationServiceInterface
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Lmr\AutoTranslator\fields\Types;
+namespace littlemissrobot\autotranslator\fields\Types;
 
 use craft\elements\Entry;
-use Lmr\AutoTranslator\contracts\FieldInterface;
-use Lmr\AutoTranslator\contracts\FieldResolverInterface;
-use Lmr\AutoTranslator\fields\Field;
+use littlemissrobot\autotranslator\contracts\FieldInterface;
+use littlemissrobot\autotranslator\contracts\FieldResolverInterface;
+use littlemissrobot\autotranslator\fields\Field;
 
 class TableField extends Field implements FieldInterface
 {

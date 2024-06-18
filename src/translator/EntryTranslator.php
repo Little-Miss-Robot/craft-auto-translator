@@ -1,14 +1,14 @@
 <?php
 
-namespace Lmr\AutoTranslator\translator;
+namespace littlemissrobot\autotranslator\translator;
 
 use Craft;
 use craft\elements\Entry;
 use craft\errors\ElementNotFoundException;
-use Lmr\AutoTranslator\contracts\EntryTranslatorInterface;
-use Lmr\AutoTranslator\contracts\FieldResolverInterface;
-use Lmr\AutoTranslator\fields\Resolver;
-use Lmr\AutoTranslator\Plugin;
+use littlemissrobot\autotranslator\contracts\EntryTranslatorInterface;
+use littlemissrobot\autotranslator\contracts\FieldResolverInterface;
+use littlemissrobot\autotranslator\fields\Resolver;
+use littlemissrobot\autotranslator\Plugin;
 use yii\base\Exception;
 
 class EntryTranslator implements EntryTranslatorInterface
