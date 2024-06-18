@@ -1,14 +1,14 @@
 <?php
 
-namespace Lmr\AutoTranslator\Fields;
+namespace Lmr\AutoTranslator\fields;
 
 use Craft;
 use craft\elements\Entry;
 use craft\fieldlayoutelements\BaseField;
 use craft\fieldlayoutelements\CustomField;
 use craft\base\FieldInterface as CraftFieldInterface;
-use Lmr\AutoTranslator\Contracts\FieldInterface;
-use Lmr\AutoTranslator\Contracts\FieldResolverInterface;
+use Lmr\AutoTranslator\contracts\FieldInterface;
+use Lmr\AutoTranslator\contracts\FieldResolverInterface;
 use Lmr\AutoTranslator\Plugin;
 use yii\base\InvalidArgumentException;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Lmr\AutoTranslator\Contracts;
+namespace Lmr\AutoTranslator\contracts;
 
 use craft\base\FieldInterface as CraftFieldInterface;
 use craft\elements\Entry;

@@ -1,25 +1,23 @@
 <?php
 
-namespace Lmr\AutoTranslator\Fields\Types;
+namespace Lmr\AutoTranslator\fields\Types;
 
 use craft\elements\Entry;
-use Lmr\AutoTranslator\Contracts\FieldInterface;
-use Lmr\AutoTranslator\Fields\Field;
+use Lmr\AutoTranslator\contracts\FieldInterface;
+use Lmr\AutoTranslator\fields\Field;
 
-class RichTextField extends Field implements FieldInterface
+class TextField extends Field implements FieldInterface
 {
     /**
      * @param string $fromLanguage
      * @param string $toLanguage
      * @param Entry $translateEntry
      * @return void
-     * @throws \craft\errors\InvalidFieldException
      */
     public function translate(string $fromLanguage, string $toLanguage, Entry $translateEntry): void
     {
         // Get the original content for this field and entry
-        $field = $this->originalEntry->{$this->handle};
-        $content = strip_tags($field->getRawContent());
+        $content = $this->originalEntry->{$this->handle};
 
         // Translate it
         $translatedContent = $this->service->translate($content, $fromLanguage, $toLanguage);

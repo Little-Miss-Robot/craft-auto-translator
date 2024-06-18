@@ -1,10 +1,10 @@
 <?php
 
-namespace Lmr\AutoTranslator\Translator;
+namespace Lmr\AutoTranslator\translator;
 
 use Craft;
 use craft\elements\Entry;
-use Lmr\AutoTranslator\Contracts\PolicyInterface;
+use Lmr\AutoTranslator\contracts\PolicyInterface;
 use Lmr\AutoTranslator\Plugin;
 
 class Translator

@@ -1,17 +1,17 @@
 <?php
 
-namespace Lmr\AutoTranslator\Models;
+namespace Lmr\AutoTranslator\models;
 
 use craft\base\Model;
 use craft\fieldlayoutelements\entries\EntryTitleField;
 use craft\fields\Matrix;
 use craft\fields\PlainText;
 use craft\fields\Table;
-use Lmr\AutoTranslator\Fields\Types\MatrixField;
-use Lmr\AutoTranslator\Fields\Types\RichTextField;
-use Lmr\AutoTranslator\Fields\Types\TableField;
-use Lmr\AutoTranslator\Fields\Types\TextField;
-use Lmr\AutoTranslator\Services\ReverseWordsTranslationService;
+use Lmr\AutoTranslator\fields\Types\MatrixField;
+use Lmr\AutoTranslator\fields\Types\RichTextField;
+use Lmr\AutoTranslator\fields\Types\TableField;
+use Lmr\AutoTranslator\fields\Types\TextField;
+use Lmr\AutoTranslator\services\ReverseWordsTranslationService;
 
 /**
  * Class Settings
@@ -42,7 +42,7 @@ class Settings extends Model
      * @var array $policy
      */
     public array $policy = [
-        'class' => \Lmr\AutoTranslator\Policies\DefaultPolicy::class,
+        'class' => \Lmr\AutoTranslator\policies\DefaultPolicy::class,
     ];
 
     /**
@@ -50,11 +50,11 @@ class Settings extends Model
      */
     public array $services = [
         'deepl' => [
-            'class' => \Lmr\AutoTranslator\Services\DeeplTranslationService::class,
+            'class' => \Lmr\AutoTranslator\services\DeeplTranslationService::class,
             'apiKey' => '05727dce-9cdc-4ca3-be6f-260f740fed54:fx',
         ],
         'google' => [
-            'class' => \Lmr\AutoTranslator\Services\GoogleCloudTranslationService::class,
+            'class' => \Lmr\AutoTranslator\services\GoogleCloudTranslationService::class,
             'project' => '$GOOGLE_TRANSLATE_PROJECT',
             'location' => '$GOOGLE_TRANSLATE_LOCATION',
             'options' => [

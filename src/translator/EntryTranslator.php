@@ -1,13 +1,13 @@
 <?php
 
-namespace Lmr\AutoTranslator\Translator;
+namespace Lmr\AutoTranslator\translator;
 
 use Craft;
 use craft\elements\Entry;
 use craft\errors\ElementNotFoundException;
-use Lmr\AutoTranslator\Contracts\EntryTranslatorInterface;
-use Lmr\AutoTranslator\Contracts\FieldResolverInterface;
-use Lmr\AutoTranslator\Fields\Resolver;
+use Lmr\AutoTranslator\contracts\EntryTranslatorInterface;
+use Lmr\AutoTranslator\contracts\FieldResolverInterface;
+use Lmr\AutoTranslator\fields\Resolver;
 use Lmr\AutoTranslator\Plugin;
 use yii\base\Exception;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Lmr\AutoTranslator\Policies;
+namespace Lmr\AutoTranslator\policies;
 
 use craft\elements\Entry;
-use Lmr\AutoTranslator\Contracts\PolicyInterface;
+use Lmr\AutoTranslator\contracts\PolicyInterface;
 
 class NeverTranslatePolicy implements PolicyInterface
 {

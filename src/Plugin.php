@@ -6,12 +6,12 @@ use Craft;
 use craft\base\{Event, Model, Plugin as BasePlugin};
 use craft\elements\Entry;
 use craft\events\ModelEvent;
-use Lmr\AutoTranslator\Contracts\FieldResolverInterface;
-use Lmr\AutoTranslator\Contracts\PolicyInterface;
-use Lmr\AutoTranslator\Contracts\TranslationServiceInterface;
-use Lmr\AutoTranslator\Fields\Resolver;
-use Lmr\AutoTranslator\Models\Settings;
-use Lmr\AutoTranslator\Translator\Translator;
+use Lmr\AutoTranslator\contracts\FieldResolverInterface;
+use Lmr\AutoTranslator\contracts\PolicyInterface;
+use Lmr\AutoTranslator\contracts\TranslationServiceInterface;
+use Lmr\AutoTranslator\fields\Resolver;
+use Lmr\AutoTranslator\models\Settings;
+use Lmr\AutoTranslator\translator\Translator;
 
 class Plugin extends BasePlugin
 {
