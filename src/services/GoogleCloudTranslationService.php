@@ -1,10 +1,10 @@
 <?php
 
-namespace Lmr\AutoTranslator\Services;
+namespace littlemissrobot\autotranslator\services;
 
 use Google\Cloud\Translate\V3\Client\TranslationServiceClient;
 use Google\Cloud\Translate\V3\TranslateTextRequest;
-use Lmr\AutoTranslator\Contracts\TranslationServiceInterface;
+use littlemissrobot\autotranslator\contracts\TranslationServiceInterface;
 
 class GoogleCloudTranslationService implements TranslationServiceInterface
 {

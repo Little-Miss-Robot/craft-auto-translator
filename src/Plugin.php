@@ -1,17 +1,17 @@
 <?php
 
-namespace Lmr\AutoTranslator;
+namespace littlemissrobot\autotranslator;
 
 use Craft;
 use craft\base\{Event, Model, Plugin as BasePlugin};
 use craft\elements\Entry;
 use craft\events\ModelEvent;
-use Lmr\AutoTranslator\Contracts\FieldResolverInterface;
-use Lmr\AutoTranslator\Contracts\PolicyInterface;
-use Lmr\AutoTranslator\Contracts\TranslationServiceInterface;
-use Lmr\AutoTranslator\Fields\Resolver;
-use Lmr\AutoTranslator\Models\Settings;
-use Lmr\AutoTranslator\Translator\Translator;
+use littlemissrobot\autotranslator\contracts\FieldResolverInterface;
+use littlemissrobot\autotranslator\contracts\PolicyInterface;
+use littlemissrobot\autotranslator\contracts\TranslationServiceInterface;
+use littlemissrobot\autotranslator\fields\Resolver;
+use littlemissrobot\autotranslator\models\Settings;
+use littlemissrobot\autotranslator\translator\Translator;
 
 class Plugin extends BasePlugin
 {

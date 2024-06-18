@@ -1,8 +1,8 @@
 <?php
 
-namespace Lmr\AutoTranslator\Services;
+namespace littlemissrobot\autotranslator\services;
 
-use Lmr\AutoTranslator\Contracts\TranslationServiceInterface;
+use littlemissrobot\autotranslator\contracts\TranslationServiceInterface;
 
 class ReverseWordsTranslationService implements TranslationServiceInterface
 {
