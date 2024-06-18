@@ -6,7 +6,7 @@ use craft\fields\Table;
 use craft\fieldlayoutelements\entries\EntryTitleField;
 use Lmr\AutoTranslator\Fields\Types\MatrixField;
 use Lmr\AutoTranslator\Fields\Types\TextField;
-use Lmr\AutoTranslator\Fields\Types\RichtextField;
+use Lmr\AutoTranslator\Fields\Types\RichTextField;
 use Lmr\AutoTranslator\Fields\Types\TableField;
 
 return [
@@ -31,7 +31,7 @@ return [
         Matrix::class => MatrixField::class,
         Table::class => TableField::class,
         EntryTitleField::class => TextField::class,
-        'craft\\ckeditor\\Field' => RichtextField::class,
-        'craft\\redactor\\Field' => RichtextField::class,
+        'craft\\ckeditor\\Field' => RichTextField::class,
+        'craft\\redactor\\Field' => RichTextField::class,
     ]
 ];

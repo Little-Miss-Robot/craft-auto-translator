@@ -6,7 +6,7 @@ use craft\elements\Entry;
 use Lmr\AutoTranslator\Contracts\FieldInterface;
 use Lmr\AutoTranslator\Fields\Field;
 
-class RichtextField extends Field implements FieldInterface
+class RichTextField extends Field implements FieldInterface
 {
     /**
      * @param string $fromLanguage
