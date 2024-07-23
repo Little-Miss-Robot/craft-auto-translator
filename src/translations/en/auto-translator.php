@@ -1,5 +1,6 @@
 <?php
     return [
+        'native-fields.title' => 'Title',
         'nav.content-settings' => 'Content settings',
         'nav.plugin-settings' => 'Plugin settings',
         'permissions.edit-plugin-settings' => 'Edit Auto Translator plugin settings',

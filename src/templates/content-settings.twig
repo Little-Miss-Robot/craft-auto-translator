@@ -12,22 +12,17 @@
 {% set selectedSubnavItem = 'content' %}
 {% set fullPageForm = true %}
 
-{% set iterableFields = [
-	"craft\\fields\\Matrix",
-	"benf\\neo\\Field",
-] %}
-
 {# ========================================================================== #}
 {# Macro #}
 {# ========================================================================== #}
-{% macro translatableField(field, info, settings) %}
+{% macro translatableField(field, group, settings) %}
 	<td>
 		{{ forms.checkboxField({
 			label: "#{field.name}",
-			id: "#{info.handle}-#{ field.handle}",
-			name: "settings[translate][#{info.handle }][]",
+			id: "#{group.handle}-#{ field.handle}",
+			name: "settings[translate][#{group.handle }][]",
 			value: field.handle,
-			checked: field.handle in settings.translate[info.handle] ?? false,
+			checked: field.handle in settings.translate[group.handle] ?? false,
 			errors: settings.getErrors('translate')
 		}) }}
 	</td>
@@ -56,8 +51,8 @@
 
 			{% set errors = [] %}
 
-			{% for info in elementGroupData %}
-				{% set error = info.error ?? '' %}
+			{% for group in elementGroupData %}
+				{% set error = group.error ?? '' %}
 
 				{% if error %}
 					{% set errors = errors | merge([ error ]) %}
@@ -74,49 +69,27 @@
 				</div>
 			{% endif %}
 
-			{% for info in elementGroupData %}
+			{% for group in elementGroupData %}
 				<div style="margin-bottom: 25px;">
 					<h2 style="margin-bottom: 5px;">
-						{{ info.name }}
+						{{ group.name }}
 					</h2>
 
 					<table>
 						<tr>
-							<th style="text-align: left;">{{ "settings.fields-name"|t('auto-translator') }}</th>
-							<th style="text-align: left;">{{ "settings.fields-handle"|t('auto-translator') }}</th>
+							<th style="text-align: left; width: 25vw;">{{ "settings.fields-name"|t('auto-translator') }}</th>
+							<th style="text-align: left; width: 25vw;">{{ "settings.fields-handle"|t('auto-translator') }}</th>
 						</tr>
 
-						{% for tab in info.tabs %}
-							{% set elements = tab.elements %}
-								{% for element in elements %}
-									{% set showField = false %}
+						{% for tab in group.tabs %}
+							{% set fields = tab.fields %}
+							{% set tabName = tab.name %}
 
-									{% if element is instance of('craft\\fieldlayoutelements\\CustomField') %}
-										{% set field = element.field %}
-										{% set showField = field.getIsTranslatable %}
-
-										{% if field.className in iterableFields and field.propagationMethod == "all" %}
-											{% set showField = true %}
-										{% endif %}
-
-									{% elseif element is instance of('craft\\fieldlayoutelements\\entries\\EntryTitleField')  %}
-										{% if element.translatable %}
-											{% set showField = true %}
-
-											{# TODO: find where the label for the title field is and add it here #}
-											{% set field = {
-												"name": element.label ?? "Title",
-												"handle": "title",
-											 } %}
-										{% endif  %}
-									{% endif %}
-
-									{% if showField %}
-										<tr>
-											{{ _self.translatableField(field, info, settings) }}
-										</tr>
-									{% endif %}
-								{% endfor %}
+							{% for field in fields %}
+								<tr>
+									{{ _self.translatableField(field, group, settings) }}
+								</tr>
+							{% endfor %}
 						{% endfor %}
 					</table>
 
