@@ -111,7 +111,7 @@ class FieldService extends Component
                             ];
                         }
 
-                    break;
+                        break;
 
                     case "craft\\fieldlayoutelements\\entries\\EntryTitleField":
                         $isTranslatable = $element->translatable;
@@ -124,7 +124,7 @@ class FieldService extends Component
                             ];
                         }
 
-                    break;
+                        break;
                 }
             }
 
@@ -157,9 +157,10 @@ class FieldService extends Component
 
                  // TODO: extends this when we want to support different propagation methods
                 $isTranslatable = ($propagationMethod == "all");
+                break;
             default:
                 $isTranslatable = $field->getIsTranslatable();
-            break;
+                break;
         }
 
         return $isTranslatable;
