@@ -14,6 +14,7 @@
         'settings.config-enabled-instructions' => 'Turn this off if you don\'t want Auto Translator to be active',
         'settings.config-service' => 'Service',
         'settings.config-service-instructions' => 'The service to use for the automatic translations',
-        'settings.config-fromLanguages' => 'Source language(s)',
+        'settings.config-fromLanguage' => 'Source language',
+        'settings.config-fromLanguage-instructions' => 'Select the source language',
         'settings.config-toLanguages' => 'Target language(s)'
     ];

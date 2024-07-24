@@ -36,20 +36,21 @@
 
 	{{ forms.selectField({
 		label: 'Service',
-		instructions: 'settings.config-enabled-instructions'| t('auto-translator'),
+		instructions: 'settings.config-service-instructions'| t('auto-translator'),
 		name: 'settings[service]',
 		options: serviceOptions,
 		value: settings.service,
 		errors: settings.getErrors('service')
 	}) }}
 
-	{{ forms.checkboxGroupField({
-		label: 'settings.config-fromLanguages'| t('auto-translator'),
-		name: 'settings[fromLanguages]',
+	{{ forms.selectField({
+		label: 'settings.config-fromLanguage'| t('auto-translator'),
+		instructions: 'settings.config-fromLanguage-instructions'|t('auto-translator'),
+		name: 'settings[fromLanguage]',
 		options: languageOptions,
-		values: settings.fromLanguages,
+		value: settings.fromLanguage,
 		required: true,
-		errors: settings.getErrors('fromLanguages')
+		errors: settings.getErrors('fromLanguage')
 	}) }}
 
 	{{ forms.checkboxGroupField({

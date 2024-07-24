@@ -24,9 +24,9 @@ class Settings extends Model
     public bool $enabled = true;
 
     /**
-     * @var array $fromLanguages
+     * @var string $fromLanguage
      */
-    public array $fromLanguages = [];
+    public string $fromLanguage = '';
 
     /**
      * @var array $toLanguages
@@ -89,7 +89,7 @@ class Settings extends Model
     protected function defineRules(): array
     {
         return [
-            [['enabled', 'fromLanguages', 'toLanguages', 'service', 'services', 'policy', 'fields'], 'required'],
+            [['enabled', 'fromLanguage', 'toLanguages', 'service', 'services', 'policy', 'fields'], 'required'],
         ];
     }
 }

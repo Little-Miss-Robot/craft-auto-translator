@@ -14,6 +14,7 @@
         'settings.config-enabled-instructions' => 'Zet dit uit als je Auto Translator niet wenst te gebruiken',
         'settings.config-service' => 'Service',
         'settings.config-service-instructions' => 'De service die Auto Translator moet gebruiken',
-        'settings.config-fromLanguages' => 'Bron ta(a)len',
+        'settings.config-fromLanguage' => 'Bron taal',
+        'settings.config-fromLanguage-instructions' => 'Selecteer de brontaal',
         'settings.config-toLanguages' => 'Doel ta(a)len'
     ];
