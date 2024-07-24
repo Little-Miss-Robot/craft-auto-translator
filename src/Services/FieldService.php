@@ -7,6 +7,7 @@ use craft\db\Query;
 use craft\elements\Entry;
 
 use yii\base\Component;
+use Lmr\AutoTranslator\Plugin;
 
 use Throwable;
 
@@ -66,6 +67,13 @@ class FieldService extends Component
 
     private function getEntryTypeInfo($fieldLayout): array
     {
+        $config = Plugin::getInstance()->getSettings();
+
+        $fromLanguage = $config->fromLanguage;
+        $toLanguages = $config->toLanguages;
+
+        $entryTypeInfo = [];
+
         $group = (new Query())
             ->select([
                 'id',
@@ -82,66 +90,99 @@ class FieldService extends Component
         $sectionHandle = $currentSection->handle;
         $sectionName = $currentSection->name;
 
-        $identifier = $this->getIdentifierForSection($sectionHandle, $group["handle"]);
+        // Only include if propagationMethod matches the needed one
+        if ($currentSection->propagationMethod == "all") {
+            // Get site settings to check if section is available in target and source
+            $siteSettings = $currentSection->siteSettings;
+            $isAvailableSource = false;
+            $potentialTargets = [];
 
-        // Get field layout tabs
-        $fieldLayoutTabs = $fieldLayout->getTabs();
-        $tabs = [];
+            foreach($siteSettings as $siteSetting) {
+                $site = $siteSetting->getSite();
+                $siteLanguage = $site->language;
 
-        // Loop over every tab to get needed content
-        foreach($fieldLayoutTabs as $tab) {
-            $tabElements = $tab->elements;
-            $tabName = $tab->name;
-            $tabFields = [];
-
-            foreach($tabElements as $element) {
-                $elementClass = get_class($element);
-
-                // Check type of elements to differentiate in data
-                switch($elementClass) {
-                    case "craft\\fieldlayoutelements\\CustomField":
-                        $elementField = $element->field;
-                        $isTranslatable = $this->getTranslatableFromField($elementField);
-
-                        if ($isTranslatable) {
-                            $tabFields[] = [
-                                // TODO: double check if this label can also be targetted
-                                "name" => $elementField->name,
-                                "handle" => $elementField->handle
-                            ];
-                        }
-
-                        break;
-
-                    case "craft\\fieldlayoutelements\\entries\\EntryTitleField":
-                        $isTranslatable = $element->translatable;
-
-                        if ($isTranslatable) {
-                            $tabFields[] = [
-                                // Get label from title field or use native name
-                                "name" => $element->label ?? Craft::t("auto-translator", "native-fields.title"),
-                                "handle" => "title"
-                            ];
-                        }
-
-                        break;
+                // Check if section is available in source language
+                if ($siteLanguage == $fromLanguage) {
+                    $isAvailableSource = true;
+                } else {
+                    // Gather potential targets
+                    $potentialTargets[$site->name] = $site->language;
                 }
             }
 
-            if ($tabFields) {
-                $tabs[] = [
-                    "name" => $tabName,
-                    "fields" => $tabFields
-                ];
+            // Not available in soure language, skip
+            if (!$isAvailableSource) {
+                return false;
             }
+
+            // If no potential targets, skip
+            if (empty($potentialTargets)) {
+                return false;
+            }
+
+            $identifier = $this->getIdentifierForSection($sectionHandle, $group["handle"]);
+
+            // Get field layout tabs
+            $fieldLayoutTabs = $fieldLayout->getTabs();
+            $tabs = [];
+
+            // Loop over every tab to get needed content
+            foreach($fieldLayoutTabs as $tab) {
+                $tabElements = $tab->elements;
+                $tabName = $tab->name;
+                $tabFields = [];
+
+                foreach($tabElements as $element) {
+                    $elementClass = get_class($element);
+
+                    // Check type of elements to differentiate in data
+                    switch($elementClass) {
+                        case "craft\\fieldlayoutelements\\CustomField":
+                            $elementField = $element->field;
+                            $isTranslatable = $this->getTranslatableFromField($elementField);
+
+                            if ($isTranslatable) {
+                                $tabFields[] = [
+                                    // TODO: double check if this label can also be targetted
+                                    "name" => $elementField->name,
+                                    "handle" => $elementField->handle
+                                ];
+                            }
+
+                            break;
+
+                        case "craft\\fieldlayoutelements\\entries\\EntryTitleField":
+                            $isTranslatable = $element->translatable;
+
+                            if ($isTranslatable) {
+                                $tabFields[] = [
+                                    // Get label from title field or use native name
+                                    "name" => $element->label ?? Craft::t("auto-translator", "native-fields.title"),
+                                    "handle" => "title"
+                                ];
+                            }
+
+                            break;
+                    }
+                }
+
+                if ($tabFields) {
+                    $tabs[] = [
+                        "name" => $tabName,
+                        "fields" => $tabFields
+                    ];
+                }
+            }
+
+            $entryTypeInfo = [
+                'name' => $sectionName . ": " . $group['name'],
+                'nativeFields' => $nativeTranslatableFields ?? [],
+                'tabs' => $tabs,
+                'handle' => $identifier,
+            ];
         }
 
-        return [
-            'name' => $sectionName . ": " . $group['name'],
-            'nativeFields' => $nativeTranslatableFields ?? [],
-            'tabs' => $tabs,
-            'handle' => $identifier,
-        ];
+        return $entryTypeInfo;
 
     }
 

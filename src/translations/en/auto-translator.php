@@ -16,5 +16,6 @@
         'settings.config-service-instructions' => 'The service to use for the automatic translations',
         'settings.config-fromLanguage' => 'Source language',
         'settings.config-fromLanguage-instructions' => 'Select the source language',
-        'settings.config-toLanguages' => 'Target language(s)'
+        'settings.config-toLanguages' => 'Target language(s)',
+        'settings.error-no-fields' => 'No fields available. Check in an environment where admin changes are allowed, that you have <b>more than one site</b> and <b>at least one section available in your target language(s)</b>.'
     ];

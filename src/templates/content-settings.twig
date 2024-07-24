@@ -97,5 +97,9 @@
 				</div>
 			{% endfor %}
 		</div>
+	{% else %}
+		<div>
+			{{ 'settings.error-no-fields'|t('auto-translator')|raw }}
+		</div>
 	{% endfor %}
 {% endblock %}

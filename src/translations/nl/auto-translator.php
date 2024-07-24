@@ -16,5 +16,6 @@
         'settings.config-service-instructions' => 'De service die Auto Translator moet gebruiken',
         'settings.config-fromLanguage' => 'Bron taal',
         'settings.config-fromLanguage-instructions' => 'Selecteer de brontaal',
-        'settings.config-toLanguages' => 'Doel ta(a)len'
+        'settings.config-toLanguages' => 'Doel ta(a)len',
+        'settings.error-no-fields' => 'Geen velden beschikbaar. Controleer in een omgeving waar admin wijzigingen toegestaan zijn dat je <b>meer dan 1 site</b> en <b>minstens 1 sectie beschikbaar in de bron ta(a)l(en)</b>.'
     ];
