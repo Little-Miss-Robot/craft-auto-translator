@@ -1,17 +1,17 @@
 <?php
 
-namespace Lmr\AutoTranslator\Models;
+namespace littlemissrobot\autotranslator\models;
 
 use craft\base\Model;
 use craft\fieldlayoutelements\entries\EntryTitleField;
 use craft\fields\Matrix;
 use craft\fields\PlainText;
 use craft\fields\Table;
-use Lmr\AutoTranslator\Fields\Types\MatrixField;
-use Lmr\AutoTranslator\Fields\Types\RichtextField;
-use Lmr\AutoTranslator\Fields\Types\TableField;
-use Lmr\AutoTranslator\Fields\Types\TextField;
-use Lmr\AutoTranslator\Services\ReverseWordsTranslationService;
+use littlemissrobot\autotranslator\fields\Types\MatrixField;
+use littlemissrobot\autotranslator\fields\Types\RichTextField;
+use littlemissrobot\autotranslator\fields\Types\TableField;
+use littlemissrobot\autotranslator\fields\Types\TextField;
+use littlemissrobot\autotranslator\services\ReverseWordsTranslationService;
 
 /**
  * Class Settings
@@ -42,7 +42,7 @@ class Settings extends Model
      * @var array $policy
      */
     public array $policy = [
-        'class' => \Lmr\AutoTranslator\Policies\DefaultPolicy::class,
+        'class' => \littlemissrobot\autotranslator\policies\DefaultPolicy::class,
     ];
 
     /**
@@ -50,11 +50,11 @@ class Settings extends Model
      */
     public array $services = [
         'deepl' => [
-            'class' => \Lmr\AutoTranslator\Services\DeeplTranslationService::class,
+            'class' => \littlemissrobot\autotranslator\services\DeeplTranslationService::class,
             'apiKey' => '05727dce-9cdc-4ca3-be6f-260f740fed54:fx',
         ],
         'google' => [
-            'class' => \Lmr\AutoTranslator\Services\GoogleCloudTranslationService::class,
+            'class' => \littlemissrobot\autotranslator\services\GoogleCloudTranslationService::class,
             'project' => '$GOOGLE_TRANSLATE_PROJECT',
             'location' => '$GOOGLE_TRANSLATE_LOCATION',
             'options' => [
@@ -79,8 +79,8 @@ class Settings extends Model
         Matrix::class => MatrixField::class,
         Table::class => TableField::class,
         EntryTitleField::class => TextField::class,
-        'craft\\ckeditor\\Field' => RichtextField::class,
-        'craft\\redactor\\Field' => RichtextField::class,
+        'craft\\ckeditor\\Field' => RichTextField::class,
+        'craft\\redactor\\Field' => RichTextField::class,
     ];
 
     /**
