@@ -38,10 +38,14 @@ class EntryTranslator implements EntryTranslatorInterface
      */
     public function translate(Entry $originalEntry, Entry $translateEntry, $fromLanguage, $toLanguage)
     {
-        $handle = $translateEntry->section->handle;
-
         $config = Plugin::getInstance()->getSettings();
-        $translateFields = $config->translate[$handle];
+
+        $section = $translateEntry->section;
+        $sectionHandle = $section->handle;
+        $entryTypeHandle = $translateEntry->type->handle;
+
+        $identifier = Craft::$container->get('fieldService')->getIdentifierForSection($sectionHandle, $entryTypeHandle);
+        $translateFields = $config->translate[$identifier];
 
         // Loop through each field and translate its contents
         foreach ($translateFields as $fieldName) {

@@ -1,0 +1,64 @@
+{% extends '_layouts/cp' %}
+
+{% requirePermission 'auto-translator:edit-plugin-settings' %}
+
+{# ========================================================================== #}
+{# Includes #}
+{# ========================================================================== #}
+{% import '_includes/forms.twig' as forms %}
+
+{# ========================================================================== #}
+{# Props #}
+{# ========================================================================== #}
+{% set title = "settings.plugin-title"|t('auto-translator') %}
+{% set selectedSubnavItem = 'plugin' %}
+{% set fullPageForm = true %}
+
+{# ========================================================================== #}
+{# Template #}
+{# ========================================================================== #}
+{% block actionButton %}
+    <input type="submit" class="btn submit" value="{{ 'settings.btn-save'|t('auto-translator') }}">
+{% endblock %}
+
+{% block content %}
+	<input type="hidden" name="action" value="auto-translator/settings/save-main-settings">
+	<input type="hidden" name="pluginHandle" value="auto-translator">
+
+	{{ forms.lightswitchField({
+		label: 'settings.config-enabled' | t('auto-translator'),
+		instructions: 'settings.config-enabled-instructions'| t('auto-translator'),
+		id: 'enabled',
+		name: 'settings[enabled]',
+		on: settings.enabled,
+		errors: settings.getErrors('enabled')
+	}) }}
+
+	{{ forms.selectField({
+		label: 'Service',
+		instructions: 'settings.config-service-instructions'| t('auto-translator'),
+		name: 'settings[service]',
+		options: serviceOptions,
+		value: settings.service,
+		errors: settings.getErrors('service')
+	}) }}
+
+	{{ forms.selectField({
+		label: 'settings.config-fromLanguage'| t('auto-translator'),
+		instructions: 'settings.config-fromLanguage-instructions'|t('auto-translator'),
+		name: 'settings[fromLanguage]',
+		options: languageOptions,
+		value: settings.fromLanguage,
+		required: true,
+		errors: settings.getErrors('fromLanguage')
+	}) }}
+
+	{{ forms.checkboxGroupField({
+		label: 'settings.config-toLanguages'| t('auto-translator'),
+		name: 'settings[toLanguages]',
+		options: languageOptions,
+		values: settings.toLanguages,
+		required: true,
+		errors: settings.getErrors('toLanguages')
+	}) }}
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends '_layouts/cp' %}
+
+{# ========================================================================== #}
+{# Includes #}
+{# ========================================================================== #}
+{% import '_includes/forms.twig' as forms %}
+
+{# ========================================================================== #}
+{# Props #}
+{# ========================================================================== #}
+{% set title = "settings.content-title"|t('auto-translator') %}
+{% set selectedSubnavItem = 'content' %}
+{% set fullPageForm = true %}
+
+{# ========================================================================== #}
+{# Macro #}
+{# ========================================================================== #}
+{% macro translatableField(field, group, settings) %}
+
+	<td>
+		{{ forms.checkboxField({
+			label: "#{field.name}",
+			id: "#{group.handle}-#{ field.handle}",
+			name: "settings[translate][#{group.handle }][]",
+			value: field.handle,
+			checked: field.handle in settings.translate[group.handle] ?? false,
+			errors: settings.getErrors('translate')
+		}) }}
+	</td>
+
+	<td>
+		{{ field.handle }}
+	</td>
+{% endmacro %}
+
+{# ========================================================================== #}
+{# Template #}
+{# ========================================================================== #}
+{% block actionButton %}
+    <input type="submit" class="btn submit" value="{{ 'settings.btn-save'|t('auto-translator') }}">
+{% endblock %}
+
+{% block content %}
+	<input type="hidden" name="action" value="auto-translator/settings/save-content-settings">
+	<input type="hidden" name="pluginHandle" value="auto-translator">
+
+	<h2>{{ 'settings.content-fields'| t('auto-translator') }}</h2>
+
+	{% for elementGroup, elementGroupData in fieldInfo %}
+		<div>
+			<h1>{{ elementGroup }}</h1>
+
+			{% set errors = [] %}
+
+			{% for group in elementGroupData %}
+				{% set error = group.error ?? '' %}
+
+				{% if error %}
+					{% set errors = errors | merge([ error ]) %}
+				{% endif %}
+			{% endfor %}
+
+			{% if errors %}
+				<div>
+					<ul>
+						{% for error in errors %}
+							<li class="error">{{ error }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
+
+			{% for group in elementGroupData %}
+
+				<div style="margin-bottom: 25px;">
+					<h2 style="margin-bottom: 5px;">
+						{{ group.name }}
+					</h2>
+
+					<table>
+						<tr>
+							<th style="text-align: left; width: 25vw;">{{ "settings.fields-name"|t('auto-translator') }}</th>
+							<th style="text-align: left; width: 25vw;">{{ "settings.fields-handle"|t('auto-translator') }}</th>
+						</tr>
+
+						{% for tab in group.tabs %}
+							{% set fields = tab.fields %}
+							{% set tabName = tab.name %}
+
+							{% for field in fields %}
+								<tr>
+									{{ _self.translatableField(field, group, settings) }}
+								</tr>
+							{% endfor %}
+						{% endfor %}
+					</table>
+
+					<hr>
+				</div>
+			{% endfor %}
+		</div>
+	{% else %}
+		<div>
+			{{ 'settings.error-no-fields'|t('auto-translator')|raw }}
+		</div>
+	{% endfor %}
+{% endblock %}

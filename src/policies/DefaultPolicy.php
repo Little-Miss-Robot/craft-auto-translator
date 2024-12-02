@@ -16,13 +16,13 @@ class DefaultPolicy implements PolicyInterface
     public function shouldTranslate(Entry $entry): bool
     {
         $config = Plugin::getInstance()->getSettings();
-        $fromLanguages = $config->fromLanguages;
+        $fromLanguage = $config->fromLanguage;
 
         // The language we've just edited and need to translate from
         $currentLanguage = $entry->site->language;
 
         // Only translate when the current language is in the list of "from languages"
-        if (! in_array($currentLanguage, $fromLanguages)) {
+        if (! ($currentLanguage == $fromLanguage)) {
             return false;
         }
 
