@@ -1,13 +1,13 @@
 <?php
 
-namespace Lmr\AutoTranslator\Services;
+namespace littlemissrobot\autotranslator\fields;
 
 use Craft;
 use craft\db\Query;
 use craft\elements\Entry;
 
 use yii\base\Component;
-use Lmr\AutoTranslator\Plugin;
+use littlemissrobot\autotranslator\Plugin;
 
 use Throwable;
 

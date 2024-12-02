@@ -16,9 +16,9 @@ use littlemissrobot\autotranslator\contracts\FieldResolverInterface;
 use littlemissrobot\autotranslator\contracts\PolicyInterface;
 use littlemissrobot\autotranslator\contracts\TranslationServiceInterface;
 use littlemissrobot\autotranslator\fields\Resolver;
+use littlemissrobot\autotranslator\fields\FieldService;
 use littlemissrobot\autotranslator\models\Settings;
 use littlemissrobot\autotranslator\translator\Translator;
-use littlemissrobot\autotranslator\services\FieldService;
 
 class Plugin extends BasePlugin
 {

@@ -18,7 +18,6 @@
 {% macro translatableField(field, group, settings) %}
 
 	<td>
-		{% dd(field) %}
 		{{ forms.checkboxField({
 			label: "#{field.name}",
 			id: "#{group.handle}-#{ field.handle}",
