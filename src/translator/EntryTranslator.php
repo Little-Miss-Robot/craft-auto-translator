@@ -44,7 +44,7 @@ class EntryTranslator implements EntryTranslatorInterface
         $sectionHandle = $section->handle;
         $entryTypeHandle = $translateEntry->type->handle;
 
-        $identifier = Plugin::getInstance()->fieldService->getIdentifierForSection($sectionHandle, $entryTypeHandle);
+        $identifier = Craft::$container->get('fieldService')->getIdentifierForSection($sectionHandle, $entryTypeHandle);
         $translateFields = $config->translate[$identifier];
 
         // Loop through each field and translate its contents

@@ -22,6 +22,9 @@ use littlemissrobot\autotranslator\services\FieldService;
 
 class Plugin extends BasePlugin
 {
+    /**
+     * @var Plugin $instance
+     */
     public static $instance;
 
     /**
@@ -63,7 +66,6 @@ class Plugin extends BasePlugin
 
         Craft::$app->onInit(function() {
             $this->bindDependencies();
-            $this->registerComponents();
             $this->attachEventHandlers();
 
             if (Craft::$app->getRequest()->getIsCpRequest()) {
@@ -72,12 +74,20 @@ class Plugin extends BasePlugin
         });
     }
 
+    /**
+     * @return mixed
+     * @throws \yii\base\InvalidRouteException
+     */
     public function getSettingsResponse(): mixed
     {
         // Redirect our standard settings screen in the settings admin page to custom settings screen
         return Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('auto-translator/plugin-settings'));
     }
 
+    /**
+     * @return array|null
+     * @throws \Throwable
+     */
     public function getCpNavItem(): ?array
     {
         $canEditSettings = true;
@@ -91,17 +101,17 @@ class Plugin extends BasePlugin
         $nav = parent::getCpNavItem();
         $nav['label'] = Craft::t('auto-translator', 'Auto Translator');
 
+        if ($canEditSettings && $currentUser->can('auto-translator:edit-plugin-settings')) {
+            $nav['subnav']['plugin'] = [
+                'label' => Craft::t('auto-translator', 'nav.plugin-settings'),
+                'url' => 'auto-translator/main-settings',
+            ];
+        }
+
         $nav['subnav']['content'] = [
             'label' => Craft::t('auto-translator', 'nav.content-settings'),
             'url' => 'auto-translator/content-settings'
         ];
-
-        if ($canEditSettings && $currentUser->can('auto-translator:edit-plugin-settings')) {
-            $nav['subnav']['plugin'] = [
-                'label' => Craft::t('auto-translator', 'nav.plugin-settings'),
-                'url' => 'auto-translator/plugin-settings',
-            ];
-        }
 
         return $nav;
     }
@@ -116,16 +126,7 @@ class Plugin extends BasePlugin
         Craft::$container->set(FieldResolverInterface::class, Resolver::class);
         Craft::$container->set(PolicyInterface::class, $config->policy);
         Craft::$container->set(TranslationServiceInterface::class, $config->services[$config->service]);
-    }
-
-    /**
-     * @return void
-     */
-    private function registerComponents(): void
-    {
-        $this->setComponents([
-			'fieldService' => \littlemissrobot\autotranslator\Services\FieldService::class,
-		]);
+        Craft::$container->set('fieldService', FieldService::class);
     }
 
     /**
@@ -143,7 +144,7 @@ class Plugin extends BasePlugin
             $sectionHandle = $entry->section->handle;
             $entryTypeHandle = $entry->type->handle;
 
-            $identifier = Plugin::getInstance()->fieldService->getIdentifierForSection($sectionHandle, $entryTypeHandle);
+            $identifier = Craft::$container->get('fieldService')->getIdentifierForSection($sectionHandle, $entryTypeHandle);
 
             if (! $config->enabled || ! isset($translatableSections[$identifier])) {
                 return;
@@ -162,29 +163,37 @@ class Plugin extends BasePlugin
             UrlManager::class,
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
             function(RegisterUrlRulesEvent $event) {
-                $event->rules['auto-translator'] = 'auto-translator/base/index';
-                $event->rules['auto-translator/content-settings'] = 'auto-translator/base/content';
-                $event->rules['auto-translator/plugin-settings'] = 'auto-translator/base/plugin';
+
+                // Index controller of plugin
+                $event->rules['auto-translator'] = 'auto-translator/settings/index';
+
+                // Main settings control panel
+                $event->rules['auto-translator/main-settings'] = 'auto-translator/settings/main';
+                $event->rules['auto-translator/save-main-settings'] = 'auto-translator/settings/save-main-settings';
+
+                // Content settings control panel
+                $event->rules['auto-translator/content-settings'] = 'auto-translator/settings/content';
+                $event->rules['auto-translator/save-content-settings'] = 'auto-translator/settings/save-content-settings';
             }
         );
 
         // Handler: UserPermissions::EVENT_REGISTER_PERMISSIONS
-		Event::on(
-			UserPermissions::class,
-			UserPermissions::EVENT_REGISTER_PERMISSIONS,
-			function (RegisterUserPermissionsEvent $event) {
-				Craft::debug(
-					'UserPermissions::EVENT_REGISTER_PERMISSIONS',
-					__METHOD__
-				);
+        Event::on(
+            UserPermissions::class,
+            UserPermissions::EVENT_REGISTER_PERMISSIONS,
+            function (RegisterUserPermissionsEvent $event) {
+                Craft::debug(
+                    'UserPermissions::EVENT_REGISTER_PERMISSIONS',
+                    __METHOD__
+                );
 
-				// Register our custom permissions
-				$event->permissions[] = [
-					'heading' => Craft::t('auto-translator', 'Auto Translator'),
-					'permissions' => $this->customAdminCpPermissions(),
-				];
-			}
-		);
+                // Register our custom permissions
+                $event->permissions[] = [
+                    'heading' => Craft::t('auto-translator', 'Auto Translator'),
+                    'permissions' => $this->customAdminCpPermissions(),
+                ];
+            }
+        );
     }
 
     /**
@@ -199,11 +208,11 @@ class Plugin extends BasePlugin
      * @return array
      */
     protected function customAdminCpPermissions(): array
-	{
-		return [
-			'auto-translator:edit-plugin-settings' => [
-				'label' => Craft::t('auto-translator', 'permissions.edit-plugin-settings'),
-			]
-		];
-	}
+    {
+        return [
+            'auto-translator:edit-plugin-settings' => [
+                'label' => Craft::t('auto-translator', 'permissions.edit-plugin-settings'),
+            ]
+        ];
+    }
 }

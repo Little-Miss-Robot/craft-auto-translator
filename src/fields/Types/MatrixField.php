@@ -27,7 +27,9 @@ class MatrixField extends Field implements FieldInterface
             return;
         }
 
-        dd($field);
+        $originalContent = $this->originalEntry->getFieldValue($this->handle);
+
+        dd($field, $originalContent);
 
         // @TODO translate
     }

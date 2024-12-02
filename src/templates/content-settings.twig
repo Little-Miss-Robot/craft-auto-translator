@@ -16,7 +16,9 @@
 {# Macro #}
 {# ========================================================================== #}
 {% macro translatableField(field, group, settings) %}
+
 	<td>
+		{% dd(field) %}
 		{{ forms.checkboxField({
 			label: "#{field.name}",
 			id: "#{group.handle}-#{ field.handle}",
@@ -40,8 +42,8 @@
 {% endblock %}
 
 {% block content %}
-    <input type="hidden" name="action" value="plugins/save-plugin-settings">
-    <input type="hidden" name="pluginHandle" value="auto-translator">
+	<input type="hidden" name="action" value="auto-translator/settings/save-content-settings">
+	<input type="hidden" name="pluginHandle" value="auto-translator">
 
 	<h2>{{ 'settings.content-fields'| t('auto-translator') }}</h2>
 
@@ -70,6 +72,7 @@
 			{% endif %}
 
 			{% for group in elementGroupData %}
+
 				<div style="margin-bottom: 25px;">
 					<h2 style="margin-bottom: 5px;">
 						{{ group.name }}

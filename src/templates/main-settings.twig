@@ -22,8 +22,8 @@
 {% endblock %}
 
 {% block content %}
-    <input type="hidden" name="action" value="plugins/save-plugin-settings">
-    <input type="hidden" name="pluginHandle" value="auto-translator">
+	<input type="hidden" name="action" value="auto-translator/settings/save-main-settings">
+	<input type="hidden" name="pluginHandle" value="auto-translator">
 
 	{{ forms.lightswitchField({
 		label: 'settings.config-enabled' | t('auto-translator'),
