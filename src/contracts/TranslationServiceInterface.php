@@ -1,6 +1,6 @@
 <?php
 
-namespace Lmr\AutoTranslator\Contracts;
+namespace littlemissrobot\autotranslator\contracts;
 
 interface TranslationServiceInterface
 {

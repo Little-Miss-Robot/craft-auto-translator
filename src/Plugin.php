@@ -1,6 +1,6 @@
 <?php
 
-namespace Lmr\AutoTranslator;
+namespace littlemissrobot\autotranslator;
 
 use Craft;
 use craft\base\{Event, Model, Plugin as BasePlugin};
@@ -12,13 +12,13 @@ use craft\helpers\UrlHelper;
 use craft\services\UserPermissions;
 use craft\web\UrlManager;
 
-use Lmr\AutoTranslator\Contracts\FieldResolverInterface;
-use Lmr\AutoTranslator\Contracts\PolicyInterface;
-use Lmr\AutoTranslator\Contracts\TranslationServiceInterface;
-use Lmr\AutoTranslator\Fields\Resolver;
-use Lmr\AutoTranslator\Models\Settings;
-use Lmr\AutoTranslator\Translator\Translator;
-use Lmr\AutoTranslator\Services\FieldService;
+use littlemissrobot\autotranslator\contracts\FieldResolverInterface;
+use littlemissrobot\autotranslator\contracts\PolicyInterface;
+use littlemissrobot\autotranslator\contracts\TranslationServiceInterface;
+use littlemissrobot\autotranslator\fields\Resolver;
+use littlemissrobot\autotranslator\models\Settings;
+use littlemissrobot\autotranslator\translator\Translator;
+use littlemissrobot\autotranslator\services\FieldService;
 
 class Plugin extends BasePlugin
 {
@@ -52,7 +52,6 @@ class Plugin extends BasePlugin
             ],
         ];
     }
-
 
     /**
      * @return void
@@ -125,7 +124,7 @@ class Plugin extends BasePlugin
     private function registerComponents(): void
     {
         $this->setComponents([
-			'fieldService' => \Lmr\AutoTranslator\Services\FieldService::class,
+			'fieldService' => \littlemissrobot\autotranslator\Services\FieldService::class,
 		]);
     }
 
